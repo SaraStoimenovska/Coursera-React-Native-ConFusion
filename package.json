@@ -11,6 +11,7 @@
     "create-react-native-app": "^1.0.0",
     "expo": "~37.0.3",
     "react": "~16.9.0",
+    "react-devtools": "^3.2.3",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-elements": "^1.0.0-beta8",
