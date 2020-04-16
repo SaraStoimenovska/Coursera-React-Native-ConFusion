@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { DISHES } from '../shared/dishes';
-import { COMMENTS } from '../shared/comments';
 import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button,  Picker, Switch} from 'react-native';
 import { Card, Icon,Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -101,9 +99,6 @@ class Dishdetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dishes: DISHES,
-            comments: COMMENTS,
-            favorites: [],
             showModal: false,
             author: '',
             comment: '',
