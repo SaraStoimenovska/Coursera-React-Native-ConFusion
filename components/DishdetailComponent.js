@@ -69,6 +69,13 @@ function RenderDish(props) {
             return false;
     }
 
+    const recognizeComment = ({ moveX, moveY, dx, dy }) => {
+        if (dx > 200)
+            return true;
+        else
+            return false;
+    }
+
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (e, gestureState) => {
             return true;
@@ -77,7 +84,7 @@ function RenderDish(props) {
             this.view.rubberBand(1000).then(endState => console.log(endState.finished ? 'finished' : 'cancelled'))
         },
         onPanResponderEnd: (e, gestureState) => {
-            if (recognizeDrag(gestureState))
+            if (recognizeDrag(gestureState)) {
                 Alert.alert(
                     'Add to Favorites?',
                     'Are you sure you want to add ' + dish.name + ' to your favorites?',
@@ -94,6 +101,10 @@ function RenderDish(props) {
                     ],
                     {cancelable: false}
                 )
+            }
+            if (recognizeComment(gestureState)) {
+                props.toggleModal();
+            }
             return true;
         }
     })
@@ -118,7 +129,7 @@ function RenderDish(props) {
                                 name={ props.favorite ? 'heart' : 'heart-o'}
                                 type='font-awesome'
                                 color='#f50'
-                                // onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}
+                                onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}
                                 />
                             <Icon
                                 raised
@@ -220,7 +231,7 @@ class Dishdetail extends Component {
                         <View style={styles.formRow}>
                         <Button 
                             raised
-                            onPress = {() =>{this.handleComment(dishId, this.state.rating, this.state.author, this.state.comment);}}
+                            onPress = {() =>{; console.log('Ok modal'); this.handleComment(dishId, this.state.rating, this.state.author, this.state.comment);}}
                             color="#512DA8"
                             title="Submit" 
                             style={{marginTop: 10}}
@@ -231,7 +242,7 @@ class Dishdetail extends Component {
                         <View style={styles.formRow}>
                         <Button 
                             raised
-                            onPress = {() =>{this.toggleModal(); this.resetForm();}}
+                            onPress = {() =>{this.toggleModal(); this.resetForm(); console.log('Cancel modal')}}
                             color="#999"
                             title="Cancel" 
                             style={{marginTop: 10}}
