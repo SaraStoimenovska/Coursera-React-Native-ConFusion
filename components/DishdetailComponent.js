@@ -89,7 +89,7 @@ function RenderDish(props) {
                         },
                         {
                             text: 'Ok',
-                            onPress: props.favorite ? console.log('Already favorite') : props.onPress()
+                            onPress: () => { props.favorite ? console.log('Already favorite') : props.onPress() },
                         }
                     ],
                     {cancelable: false}
