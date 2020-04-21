@@ -23,7 +23,7 @@ class Menu extends Component {
     render() {
         const renderMenuItem = ({item, index}) => {
             return (
-                <Animatable.View animation="fadeInRightBig" duration={2000} delay={1000}>
+                <Animatable.View animation="fadeInRightBig" duration={2000} delay={1000} useNativeDriver={true}>
                     <Tile
                         key={index}
                         title={item.name}
