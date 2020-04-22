@@ -10,6 +10,7 @@
   "dependencies": {
     "create-react-native-app": "^1.0.0",
     "expo": "~37.0.3",
+    "expo-secure-store": "^8.1.0",
     "react": "~16.9.0",
     "react-devtools": "^3.2.3",
     "react-dom": "~16.9.0",
