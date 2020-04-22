@@ -10,6 +10,9 @@
   "dependencies": {
     "create-react-native-app": "^1.0.0",
     "expo": "~37.0.3",
+    "expo-image-picker": "~8.1.0",
+    "expo-mail-composer": "~8.1.0",
+    "expo-permissions": "~8.1.0",
     "expo-secure-store": "^8.1.0",
     "react": "~16.9.0",
     "react-devtools": "^3.2.3",
@@ -25,9 +28,7 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.9.1",
-    "redux-thunk": "^2.2.0",
-    "expo-permissions": "~8.1.0",
-    "expo-mail-composer": "~8.1.0"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",
