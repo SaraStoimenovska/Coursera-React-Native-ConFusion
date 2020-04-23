@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Menu from './MenuComponent';
 import Dishdetail from './DishdetailComponent';
-import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Platform, Text, ScrollView, Image, StyleSheet, ToastAndroid } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import Home from './HomeComponent';
@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 import Reservation from './ReservationComponent';
 import Login from './LoginComponent';
+import * as NetInfo from '@react-native-community/netinfo';
 
 
 const mapStateToProps = state => {
@@ -297,6 +298,8 @@ class Main extends Component {
     this.state = {
         selectedDish: null
     };
+    this.unsubscribe = null;
+    this.handleConnectivityChange = this.handleConnectivityChange.bind(this)
   }
 
   componentDidMount() {
@@ -304,6 +307,36 @@ class Main extends Component {
     this.props.fetchComments();
     this.props.fetchPromos();
     this.props.fetchLeaders();
+
+    NetInfo.fetch().then(connectionInfo => {
+      ToastAndroid.show('Initial Network Connectivity Type: ' + connectionInfo.type, ToastAndroid.LONG)
+    });
+    
+    this.unsubscribe = NetInfo.addEventListener(this.handleConnectivityChange);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe = NetInfo.removeEventListener(this.handleConnectivityChange);
+    this.unsubscribe.unsubscribe();
+  }
+
+  handleConnectivityChange = connectionInfo => {
+    switch (connectionInfo.type) {
+      case 'none':
+        ToastAndroid.show('You are now offline!', ToastAndroid.LONG);
+        break;
+      case 'wifi':
+        ToastAndroid.show('You are now connected to WiFi!', ToastAndroid.LONG);
+        break;
+      case 'cellular':
+        ToastAndroid.show('You are now connected to Cellular!', ToastAndroid.LONG);
+        break;
+      case 'unknown':
+        ToastAndroid.show('You are have an unknown connection!', ToastAndroid.LONG);
+        break;
+      default:
+        break;
+    }
   }
 
   onDishSelect(dishId) {
